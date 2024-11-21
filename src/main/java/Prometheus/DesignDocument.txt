@@ -1,0 +1,80 @@
+
+
+
+---Project Prometheus---
+
+>a text-based adventure game project by Syd Wentz
+
+---Index---
+1. Goals
+2. Systems
+3. Story Ideas
+4.
+
+
+---Goals---
+
+*** Indicates Stretch Goals
+
+>Create a working D&D 3.5 style character creator  []
+    > Ancestry affects Stats       [x]
+    > Point set Stat System        [x]
+    > Class System                 []
+        >Fighter []
+        >Cleric  []
+        >Rogue  []
+        >Wizard  []
+    >Derived Stats                 []
+        >hp    []   //from class+roll
+        >AC    []   //from items+dex
+        >skills[]   //from class+stats
+        >saves []   //from class+stats
+  //> Question-based Stat system   [-]
+  //> Age affects Stats            [-]
+  //> Alignment questions          [-]
+
+>Create a D&D 3.5 style battle system              []
+    > Atk roll vs AC to determine hit []
+        > Crit system           []
+        > Fumble system         []
+    > Initiative  //rolled each round []
+
+>Create a shop                                     []
+    > Static inventory                      []
+    > Randomized items indicating commerce  []
+  //> Supply/Demand***                      [-]
+
+>Create a small dungeon>=9 rooms                   []
+    > semi random monster encounters          []
+    > Semi random loot table                  []
+    > direction based navigation              []
+    > basic skill checks (search, listen, etc.) []
+    > boss encounter w/phases                 []
+
+// >Party System for extra characters***              [-]
+    // > Find NPCs in dungeon                [-]
+    // > Account for More than one combatant [-]
+
+
+
+
+---Systems---
+    Character Creation based on D&D 3.5 system. This includes some but not ALL of the depth from the TTRPG. We will use
+    Name, Ancestry, Age, Class, Stats, Skills(though a much smaller list), saves, AC, and of course, HP. Some of these
+    depend on each other and some are mor placeholder than useful parameters, as defined below.
+    *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+        Name- placeholder. Use in Conversations
+        Ancestry - parent(stats/special abilities) Augments starting stats and bestows starting special abilities.
+                    In later iterations, may have social interactions as well.
+        Age- Placeholder. Later iterations may have use in social interactions
+        Class- Parent(Skills/special abilities) Determines what skills will have a bonus and confers traits and abilities
+                upon level up.
+        Stats- Child(Ancestry/Rolled) Basic D&D 6 Stat array. Used in EVERYTHING
+        SKills- Child(Class) Search, spot, listen, heal, etc.
+        Saves- Child(Class/Stats)
+        AC- Augmented by your armor and equipment.
+        HP- Child(Class) Rolled each level up and size of die is determined by Class
+    *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+
+
+---Story Ideas---

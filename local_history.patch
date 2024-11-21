@@ -1,0 +1,27 @@
+Index: src/main/java/Prometheus/Story/ActOne.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Prometheus/Story/ActOne.java b/src/main/java/Prometheus/Story/ActOne.java
+--- a/src/main/java/Prometheus/Story/ActOne.java	
++++ b/src/main/java/Prometheus/Story/ActOne.java	(date 1727739207753)
+@@ -30,9 +30,8 @@
+         GameLogic.clearConsole();
+         System.out.println("               ~this godsdamned cold is going to kill us before we even find the summit.~");
+         GameLogic.anythingToContinue();
+-        GameLogic.anythingToContinue();
+         GameLogic.clearConsole();
+-        System.out.println("** you cinch you cloak even tighter in a vain effort to block the blisteringly cold mountain wind **");
++        System.out.println("** you cinch your cloak even tighter in a vain effort to block the blisteringly cold mountain wind **");
+         System.out.println("** as you do so, you feel the identifier tag sewn into the lining of your cloak **");
+         GameLogic.anythingToContinue();
+         GameLogic.clearConsole();
+@@ -41,5 +40,7 @@
+         GameLogic.anythingToContinue();
+         GameLogic.clearConsole();
+         System.out.println("** curious as to how you'll be remembered when you no longer have a face, you take a look **");
++        GameLogic.anythingToContinue();
++        GameLogic.clearConsole();
+     }
+ }
