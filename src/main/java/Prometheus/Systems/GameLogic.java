@@ -1,16 +1,17 @@
 package Prometheus.Systems;
 
 
+import Prometheus.Characters.*;
 import Prometheus.Characters.Character;
-import Prometheus.Characters.Equipment;
-import Prometheus.Characters.Inventory;
-import Prometheus.Characters.Player;
+import Prometheus.Combat.Attack;
 import Prometheus.Story.ActOne;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import static Prometheus.Characters.Ancestry.*;
-import static Prometheus.Combat.Combat.combatStart;
+import static Prometheus.Combat.CombatTutorial.tutorialStart;
 
 public class GameLogic {
 
@@ -99,16 +100,21 @@ public class GameLogic {
         }
 
         //print campfire
-        ActOne.printCampsite(backpack);              //removed for testing speed
+//        ActOne.printCampsite();              //removed for testing speed
 
         player.printCharacterSheet(playerEquip);
         Inventory.printInventory(backpack.getInventory());
         System.out.println("\n\n\n");
 
-        Encounters.setupEnemyEncounters();
-        combatStart(player, playerEquip, Encounters.chooseEnemy(Encounters.getEnemyEncounters()));
+        //print dungeon intro
+        ActOne.dungeonIntro();
+        List<Attack> wendigoTut = new ArrayList<>();
+        wendigoTut.add(new Attack("Claws",1,6,0));
+        Enemy tutorialWendigo = new Enemy("Wendigo",35, 10, 2,2,2,4, wendigoTut);
+        tutorialStart(player, playerEquip,tutorialWendigo);
 
         //print dungeonStart
+
 
 
 

@@ -6,46 +6,68 @@ import Prometheus.Characters.Player;
 import Prometheus.Items.Weapon;
 import Prometheus.Systems.Dice;
 
+import java.sql.SQLOutput;
+
 import static Prometheus.Characters.Equipment.equipmentSlots;
 import static Prometheus.Items.Weapon.basicAtk;
 import static Prometheus.Systems.GameLogic.*;
 
-public class Combat {
+public class CombatTutorial {
 
-    public static void combatStart(Player player, Equipment playerEquip, Enemy enemy){
+    static int count =0;
+
+    public static void tutorialStart(Player player, Equipment playerEquip, Enemy enemy){
 
         boolean hasRun = false;
         boolean playerTurn;
         //get initiative
+        clearConsole();
+        System.out.println("~~FIRST initiative is rolled to see who goes first!~~");
+        anythingToContinue();
+        clearConsole();
         if(player.getSaveRef() > enemy.getSaveRef()){
             playerTurn = true;
             System.out.println("\nYou caught the " + enemy.getName() + " unaware and get to act first!");
+            System.out.println("\n ~~YES! You we're faster than the creature! Now let's decide how to handle it!");
+            anythingToContinue();
+            clearConsole();
         } else {
             playerTurn = false;
             System.out.println("\nA " + enemy.getName() + " caught you off guard!");
+            System.out.println("\n ~~OH NO! The creature was faster than you! This is probably going to hurt....");
+            anythingToContinue();
+            clearConsole();
         }
 
-        while (player.getCurrentHP() > 0 && enemy.getCurrentHP() > 0){
+        while (count<15){
+            if(player.getCurrentHP() <= 0){
+                System.out.println("Oops.... let's just fix that for you....");
+                player.setCurrentHP(player.getMaxHP());
+                anythingToContinue();
+                clearConsole();
+                System.out.println("        *HP restored**           ");
+                System.out.println("There we go... get back in there!");
+            }
             if(playerTurn){
                 if(playerTurn(player, playerEquip, enemy)){
-                    hasRun = true;
                     break;
                 }
             }else{
                 enemyTurn(player, enemy, playerEquip);
             }
             playerTurn = !playerTurn;
+            count++;
         }
-        if(hasRun){
-            System.out.println("You barely managed to escape the " + enemy.getName() + "...");
-        }else if(player.getCurrentHP() <= 0){
-            System.out.println("You have succumb to your wounds.... Game Over.");
-        }else{
-            System.out.println("The " + enemy.getName() + " is no more...");
-        }
+        System.out.println("~~ that's the end of the tutorial...                  ~~");
+        System.out.println("~~ I hope you learned something.                      ~~");
+        System.out.println("~~ I won't be refilling your health from here on out. ~~");
+        System.out.println("~~                            Have fun!               ~~");
+        player.setCurrentSP(player.getMaxSP());
+        player.setCurrentHP(player.getMaxHP());
+        anythingToContinue();
+        clearConsole();
 
     }
-
 
     //combat menu
     private static void printCombatMenu(Player player){
@@ -66,7 +88,7 @@ public class Combat {
 
 
 
-//--------ROLL TO HIT
+    //--------ROLL TO HIT
     private static boolean rollToHit(Player player, Weapon equipped, Enemy enemy){
         if(equipped.getType() == "Ranged" || equipped.getType() == "Agile"){
             if(Dice.d20(1)+player.getStatModifiers()[1]+player.getBaseAttackBonus() >= enemy.getAc()){
@@ -99,7 +121,7 @@ public class Combat {
 
 
 
-//------------------TURNS
+    //------------------TURNS
     private static boolean playerTurn(Player player, Equipment playerEquip, Enemy enemy){
         player.setTempDef(0);
         int menuSelection = -1;
@@ -108,11 +130,17 @@ public class Combat {
             printCombatMenu(player);
             menuSelection = promptForMenuSelection();
             if(menuSelection == 1){  //basic attack
+                System.out.println("~~ Alright! This will attack with your equipped weapon! ~~");
+                anythingToContinue();
+                clearConsole();
                 Weapon equipped = playerEquip.getEquippedWeapon(player.getDominantHand());
                 playerAttack(player, equipped, enemy);
                 isTurn = false;
             }else if(menuSelection == 2){ //spells & skills
                 boolean inSkillMenu = true;
+                System.out.println("~~ Nice! Skills & Spells.... you can use these as long as you have enough SP! ~~");
+                anythingToContinue();
+                clearConsole();
                 while(inSkillMenu){
                     int skillMenuSelection = -1;
                     printSpellsAndSkillMenu(player);
@@ -132,29 +160,52 @@ public class Combat {
                     }
                 }
             }else if(menuSelection == 3){  //use item
-                isTurn = false;
+                System.out.println("~~ this is where you will find any usable items from your backpack... ~~");
+                System.out.println("~~...let's not use them in THIS fight but remember this for later!    ~~");
+                anythingToContinue();
+                clearConsole();
+
             }else if(menuSelection == 4){  //defend
+                System.out.println("~~ THIS option will give you a temporary bonus to you AC until your next turn! ~~");
+                System.out.println("~~ this means you will be more difficult to hit on your enemy's next attack! ~~");
+                anythingToContinue();
+                clearConsole();
+                System.out.println("~~ The amount of a bonus is determined by: ~~");
+                System.out.println("~~ a) your Shield, if you have one         ~~");
+                System.out.println("~~ b) your Con or Dex, whichever is higher!~~");
+                anythingToContinue();
+                clearConsole();
                 if(equipmentSlots.get("Shield").getDefPwr()>0){
                     player.setTempDef(equipmentSlots.get("Shield").getDefPwr());
                     System.out.println("You raise your shield and brace for an attack!");
+                    System.out.println("~~ NICE! This added +" + equipmentSlots.get("Shield").getDefPwr() + " to your AC!");
+                    anythingToContinue();
+                    clearConsole();
                 }else if(player.getStatModifiers()[1]>0 &&player.getStatModifiers()[1]>player.getStatModifiers()[2]){
                     player.setTempDef(player.getStatModifiers()[1]);
                     System.out.println("You set your feet and prepare to dodge!");
+                    System.out.println("~~ NICE! This added +" + player.getStatModifiers()[1] + " from your Dexterity Modifier to your AC!");
+                    anythingToContinue();
+                    clearConsole();
                 }else if(player.getStatModifiers()[2]>0 &&player.getStatModifiers()[2]>player.getStatModifiers()[1]){
                     player.setTempDef(player.getStatModifiers()[2]);
                     System.out.println("You set your feet and brace for impact!");
+                    System.out.println("~~ NICE! This added +" + player.getStatModifiers()[2] + " from your Constitution Modifier to your AC!");
+                    anythingToContinue();
+                    clearConsole();
                 }else{
                     System.out.println("Your as ready as you're going to be....");
+                    System.out.println("~~ ouch.... you have neither a Shield NOR a positive stat modifier.... no bonus for you! ~~");
+                    anythingToContinue();
+                    clearConsole();
                 }
 
                 isTurn = false;
             }else if(menuSelection == 5){  //run away!
-                if(Dice.d20(1)+ player.getSaveRef()>=Dice.d20(1)+enemy.getSaveRef()){
-                    return true;
-                }else{
-                    System.out.println("The " + enemy.getName() + " prevented you from escaping!!!");
-                }
-                isTurn = false;
+                System.out.println("The " + enemy.getName() + " prevented you from escaping!!!");
+                System.out.println("~~this is the tutorial.... you can't run!~~");
+                anythingToContinue();
+                clearConsole();
             }else if(menuSelection != 0){
                 System.out.println("Invalid Menu Choice");
             }
@@ -193,6 +244,7 @@ public class Combat {
         }else{
             System.out.println("\nYour attack missed!!\n");
         }
+        anythingToContinue();
     }
 
 

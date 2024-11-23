@@ -51,7 +51,7 @@ public class ActOne {
 
     //campsite AFTER character initialization
     //setup starter items
-    public static void printCampsite(Inventory backpack){
+    public static void printCampsite(){
         clearConsole();
         System.out.println("-WE'RE HERE! EVERYONE SET UP!");
         anythingToContinue();
@@ -81,6 +81,48 @@ public class ActOne {
         clearConsole();
     }
 
-    //
+    //dungeon intro
+    public static void dungeonIntro(){
+        clearConsole();
+        System.out.println("** you hear shouting coming from the edge of camp and decide to check it out ** ");
+        anythingToContinue();
+        clearConsole();
+        System.out.println("** you see a group forming around a single soldier.... one of the forward team ** ");
+        anythingToContinue();
+        clearConsole();
+        System.out.println("-What happened?! Where's the rest of your team?!?");
+        System.out.println("             the captain asks the bloody soldier");
+        anythingToContinue();
+        clearConsole();
+        System.out.println("** you're sure the soldier can't answer... **");
+        anythingToContinue();
+        clearConsole();
+        System.out.println("** it looks like half their face is missing  but they manage to weakly point at the opening of the cave**");
+        anythingToContinue();
+        clearConsole();
+        System.out.println("** the captain looks down...");
+        System.out.println("-ALRIGHT. Secondary team. Plans have accelerated. Prepare to move in");
+        anythingToContinue();
+        clearConsole();
+        System.out.println("                                          ....shit.");
+        anythingToContinue();
+        clearConsole();
+        System.out.println("That's your team. Guess it's now or never.");
+        anythingToContinue();
+        clearConsole();
+
+        System.out.println("** after about 10mins your group of 5 makes their way to the opening of the cave.");
+        anythingToContinue();
+        clearConsole();
+        System.out.println("** you all step into the cave and venture in **");
+        System.out.println("** in the corner is what seems to be the remains of the forward team... and some creature hunched over top of them");
+        anythingToContinue();
+        clearConsole();
+        System.out.println("** it cranes its like neck backwards at your team.... red eyes aglow, wreathed in shaggy white fur");
+        System.out.println("** before anyone can react it has crossed half the small room and swiped out with its long claws, rendering 2 of your team on the ground and helpless....");
+        System.out.println("** it sets it's sights on you.... here it comes! **");
+        anythingToContinue();
+        clearConsole();
+    }
 
 }
