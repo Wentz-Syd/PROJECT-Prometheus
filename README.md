@@ -6,6 +6,7 @@ WiP text adventure.
   -4 Ancestries
   -4 Classes
   -Re-rollable and Assignable Stat Array
+  -tutorial combat
 
 -Basic combat System--
   -Attack with equipped Weapon
