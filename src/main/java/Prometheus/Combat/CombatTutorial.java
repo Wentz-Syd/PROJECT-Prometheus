@@ -15,6 +15,7 @@ import static Prometheus.Systems.GameLogic.*;
 public class CombatTutorial {
 
     static int count =0;
+    final int DEFAULT_SELECTION = 0;
 
     public static void tutorialStart(Player player, Equipment playerEquip, Enemy enemy){
 
@@ -142,10 +143,12 @@ public class CombatTutorial {
                 anythingToContinue();
                 clearConsole();
                 while(inSkillMenu){
-                    int skillMenuSelection = -1;
+                    int skillMenuSelection = -2;
                     printSpellsAndSkillMenu(player);
                     skillMenuSelection = promptForMenuSelection();
-                    if(skillMenuSelection==0){
+                    if(skillMenuSelection==0) {
+                        inSkillMenu = false;
+                    }else if(skillMenuSelection==-1){
                         inSkillMenu = false;
                     }else{
                         SpecialAttack chosenSkill = player.getSpellsAndSkills().get(skillMenuSelection);

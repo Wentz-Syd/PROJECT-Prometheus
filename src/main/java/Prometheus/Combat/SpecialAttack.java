@@ -33,7 +33,7 @@ public class SpecialAttack extends Attack{
             if (player.getCurrentHP() > player.getMaxHP()) {
                 player.setCurrentHP(player.getMaxHP());
             }
-            player.setCurrentSP(player.getCurrentHP()-getCost());
+            player.setCurrentSP(player.getCurrentSP()-getCost());
             System.out.println("\nYou healed yourself for " + (player.getCurrentHP()-startingHp) + "!" );
         }else{
             int dmgDealt = basicAttack(modifier);
